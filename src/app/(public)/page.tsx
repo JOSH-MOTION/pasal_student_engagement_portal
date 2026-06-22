@@ -5,13 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { db, Concern, Suggestion, Opportunity, EventItem, Announcement } from "@/lib/supabase";
-import { 
-  AlertTriangle, 
-  Lightbulb, 
-  Briefcase, 
-  Calendar, 
-  ChevronLeft, 
-  ChevronRight, 
+import {
+  AlertTriangle,
+  Lightbulb,
+  Briefcase,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
   ArrowRight,
   TrendingUp,
   MapPin,
@@ -105,12 +105,12 @@ export default function Homepage() {
       <section className="relative h-[600px] md:h-[680px] flex items-center overflow-hidden bg-[#000d3d]">
         {/* Background image constrained to the right side to prevent aggressive zooming, allowing the face and half body to show, while blending seamlessly */}
         <div className="absolute inset-y-0 right-0 w-full md:w-[70%] lg:w-[60%] z-0 select-none pointer-events-none">
-          <Image 
-            src="/hero.jpeg" 
-            alt="Oppong Ankrah for PASAL" 
-            fill 
+          <Image
+            src="/hero.jpeg"
+            alt="Reginald Ankrah for PASAL"
+            fill
             className="object-cover object-[center_top] opacity-100 transition-opacity duration-300"
-            priority 
+            priority
           />
           {/* Edge blending gradients so it fades perfectly into the dark blue background */}
           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#000d3d] to-transparent z-10"></div>
@@ -120,19 +120,19 @@ export default function Homepage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#000d3d]/90 via-transparent to-transparent z-10"></div>
         {/* Subtle top/bottom overlays for contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d1b2a]/60 via-transparent to-transparent z-10"></div>
-        
+
         {/* Decorative gold line/bar at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#fdcc14] via-[#fdcc14]/70 to-transparent z-20" />
 
         <div className="max-w-[1200px] mx-auto w-full px-container-padding-mobile md:px-container-padding-desktop relative z-20">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", staggerChildren: 0.2 }}
             className="max-w-2xl text-white flex flex-col items-start"
           >
             {/* Badge pill */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -140,11 +140,11 @@ export default function Homepage() {
             >
               <span className="flex h-2 w-2 rounded-full bg-[#fdcc14] animate-pulse" />
               <span className="text-xs md:text-sm font-semibold tracking-wider uppercase text-[#fdcc14]">
-                Oppong Ankrah For PASAL President
+                Reginald Ankrah For PASAL President
               </span>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -154,17 +154,17 @@ export default function Homepage() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#fdcc14] to-[#ffe875] font-extrabold">Your Campus.</span> <br />
               Your Future.
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
               className="font-body text-base md:text-lg mb-8 text-white/95 max-w-xl leading-relaxed drop-shadow-md bg-black/20 p-2 rounded-lg backdrop-blur-sm"
             >
-              <strong className="text-[#fdcc14]">A Vision by Oppong Ankrah:</strong> Digitalization is here to stay. PASAL deserves to stand out in aggregating the concerns, ideas, and suggestions of our students. This platform provides a centralized digital space where every voice is heard, valued, and empowered.
+              <strong className="text-[#fdcc14]">A Vision by Reginald Ankrah:</strong> Digitalization is here to stay. PASAL deserves to stand out in aggregating the concerns, ideas, and suggestions of our students. This platform provides a centralized digital space where every voice is heard, valued, and empowered.
             </motion.p>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -332,9 +332,8 @@ export default function Homepage() {
               return (
                 <div
                   key={campus.name}
-                  className={`group relative overflow-hidden rounded-2xl h-80 cursor-pointer shadow-lg transition-all duration-500 ${
-                    isHighlighted ? "ring-4 ring-secondary-container scale-[1.02]" : "opacity-90 md:opacity-100"
-                  }`}
+                  className={`group relative overflow-hidden rounded-2xl h-80 cursor-pointer shadow-lg transition-all duration-500 ${isHighlighted ? "ring-4 ring-secondary-container scale-[1.02]" : "opacity-90 md:opacity-100"
+                    }`}
                 >
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"

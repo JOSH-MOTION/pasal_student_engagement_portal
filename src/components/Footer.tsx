@@ -32,7 +32,7 @@ export default function Footer() {
             The official digital platform for the Public Administration Students Association (PASAL), University of Ghana. Empowering students through digital innovation.
           </p>
         </div>
-        
+
         <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
           <div className="flex flex-col gap-3">
             <h4 className="font-bold text-[#FDCC14] uppercase tracking-wider text-xs">Resources</h4>
@@ -54,7 +54,7 @@ export default function Footer() {
           © {new Date().getFullYear()} PASAL - University of Ghana. All rights reserved.
         </p>
         <p className="text-white/60 text-xs flex items-center gap-1">
-          A Vision by Oppong Ankrah <span className="text-[#FDCC14]">♥</span> for PASAL Students
+          A Vision by Reginald Ankrah <span className="text-[#FDCC14]">♥</span> for PASAL Students
         </p>
       </div>
     </footer>
