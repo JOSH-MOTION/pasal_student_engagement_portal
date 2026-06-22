@@ -53,9 +53,9 @@ export default function Footer() {
         <p className="text-white/60 text-xs">
           © {new Date().getFullYear()} PASAL - University of Ghana. All rights reserved.
         </p>
-        {/* <p className="text-white/60 text-xs flex items-center gap-1">
-          Built with <span className="text-[#FDCC14]">♥</span> for PASAL Students
-        </p> */}
+        <p className="text-white/60 text-xs flex items-center gap-1">
+          A Vision by Oppong Ankrah <span className="text-[#FDCC14]">♥</span> for PASAL Students
+        </p>
       </div>
     </footer>
   );

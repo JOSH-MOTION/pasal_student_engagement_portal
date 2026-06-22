@@ -28,6 +28,7 @@ function ConcernsContent() {
 
   // Form State
   const [campus, setCampus] = useState("");
+  const [level, setLevel] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [anonymous, setAnonymous] = useState(false);
@@ -93,6 +94,7 @@ function ConcernsContent() {
     try {
       const added = await db.addConcern({
         campus: campus as Concern["campus"],
+        level: level ? (level as Concern["level"]) : undefined,
         title,
         description,
         anonymous,
@@ -107,6 +109,8 @@ function ConcernsContent() {
       setDescription("");
       setAnonymous(false);
       setUsername("");
+      setCampus("");
+      setLevel("");
 
       // Trigger success Toast
       setToastMessage("Concern submitted successfully!");
@@ -182,6 +186,24 @@ function ConcernsContent() {
                   <option value="Main">Main Campus</option>
                   <option value="City">City Campus</option>
                   <option value="Satellite">Satellite Campus</option>
+                </select>
+              </div>
+
+              {/* Level Selection */}
+              <div className="space-y-2">
+                <label className="block font-label-sm text-xs font-bold text-on-surface-variant tracking-wider">
+                  LEVEL
+                </label>
+                <select
+                  value={level}
+                  onChange={(e) => setLevel(e.target.value)}
+                  className="w-full bg-surface-container-low border-none rounded-lg p-3 font-body-md focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
+                >
+                  <option value="" disabled>Select your level</option>
+                  <option value="100">Level 100</option>
+                  <option value="200">Level 200</option>
+                  <option value="300">Level 300</option>
+                  <option value="400">Level 400</option>
                 </select>
               </div>
 

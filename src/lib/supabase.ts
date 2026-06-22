@@ -13,6 +13,7 @@ export const supabase = isSupabaseConfigured
 export interface Concern {
   id: string;
   campus: "Main" | "City" | "Satellite";
+  level?: "100" | "200" | "300" | "400";
   title: string;
   description: string;
   anonymous: boolean;
@@ -24,6 +25,7 @@ export interface Concern {
 export interface Suggestion {
   id: string;
   campus: "Main" | "City" | "Satellite";
+  level?: "100" | "200" | "300" | "400";
   title: string;
   description: string;
   anonymous: boolean;

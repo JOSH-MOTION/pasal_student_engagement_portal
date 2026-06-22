@@ -28,6 +28,7 @@ function SuggestionsContent() {
 
   // Form State
   const [campus, setCampus] = useState("");
+  const [level, setLevel] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [anonymous, setAnonymous] = useState(false);
@@ -93,6 +94,7 @@ function SuggestionsContent() {
     try {
       const added = await db.addSuggestion({
         campus: campus as Suggestion["campus"],
+        level: level ? (level as Suggestion["level"]) : undefined,
         title,
         description,
         anonymous,
@@ -107,6 +109,8 @@ function SuggestionsContent() {
       setDescription("");
       setAnonymous(false);
       setUsername("");
+      setCampus("");
+      setLevel("");
 
       // Trigger success Toast
       setToastMessage("Suggestion submitted successfully!");
@@ -195,6 +199,24 @@ function SuggestionsContent() {
                   <option value="Satellite">Satellite Campus</option>
                 </select>
               </div>
+
+                {/* Level Selection */}
+                <div className="space-y-2">
+                  <label className="block font-label-sm text-xs font-bold text-on-surface-variant tracking-wider">
+                    LEVEL
+                  </label>
+                  <select
+                    value={level}
+                    onChange={(e) => setLevel(e.target.value)}
+                    className="w-full bg-surface-container-low border-none rounded-lg p-3 font-body-md focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none"
+                  >
+                    <option value="" disabled>Select your level</option>
+                    <option value="100">Level 100</option>
+                    <option value="200">Level 200</option>
+                    <option value="300">Level 300</option>
+                    <option value="400">Level 400</option>
+                  </select>
+                </div>
 
               {/* Title */}
               <div className="space-y-2">

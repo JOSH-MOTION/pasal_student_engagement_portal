@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { db, Concern, Suggestion, Opportunity, EventItem, Announcement } from "@/lib/supabase";
 import { 
   AlertTriangle, 
@@ -102,45 +103,73 @@ export default function Homepage() {
 
       {/* Hero Section */}
       <section className="relative h-[600px] md:h-[680px] flex items-center overflow-hidden bg-[#000d3d]">
-        {/* Background image using next/image with top offset to show head */}
-        <div className="absolute inset-0 z-0 select-none pointer-events-none">
+        {/* Background image constrained to the right side to prevent aggressive zooming, allowing the face and half body to show, while blending seamlessly */}
+        <div className="absolute inset-y-0 right-0 w-full md:w-[70%] lg:w-[60%] z-0 select-none pointer-events-none">
           <Image 
             src="/hero.jpeg" 
-            alt="PASAL Student Engagement" 
+            alt="Oppong Ankrah for PASAL" 
             fill 
-            className="object-cover object-[center_12%] opacity-80 transition-opacity duration-300"
+            className="object-cover object-[center_top] opacity-100 transition-opacity duration-300"
             priority 
           />
+          {/* Edge blending gradients so it fades perfectly into the dark blue background */}
+          <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#000d3d] to-transparent z-10"></div>
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#000d3d] to-transparent z-10"></div>
         </div>
-        {/* Deep, immersive overlay gradient tailored to UG Navy brand colors */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#000d3d]/95 via-[#001057]/80 to-[#001057]/30 z-10"></div>
+        {/* Deep, immersive overlay gradient tailored to UG Navy brand colors - fading out to transparent very early so his face is completely visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#000d3d]/90 via-transparent to-transparent z-10"></div>
         {/* Subtle top/bottom overlays for contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0d1b2a]/90 via-transparent to-black/30 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d1b2a]/60 via-transparent to-transparent z-10"></div>
         
         {/* Decorative gold line/bar at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#fdcc14] via-[#fdcc14]/70 to-transparent z-20" />
 
         <div className="max-w-[1200px] mx-auto w-full px-container-padding-mobile md:px-container-padding-desktop relative z-20">
-          <div className="max-w-2xl text-white slide-up flex flex-col items-start">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", staggerChildren: 0.2 }}
+            className="max-w-2xl text-white flex flex-col items-start"
+          >
             {/* Badge pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 shadow-sm">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#001057]/50 backdrop-blur-md border border-[#fdcc14]/40 mb-6 shadow-sm"
+            >
               <span className="flex h-2 w-2 rounded-full bg-[#fdcc14] animate-pulse" />
-              <span className="text-xs md:text-sm font-semibold tracking-wider uppercase text-white/90">
-                University of Ghana · PASAL Portal
+              <span className="text-xs md:text-sm font-semibold tracking-wider uppercase text-[#fdcc14]">
+                Oppong Ankrah For PASAL President
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.15] text-white tracking-tight drop-shadow-sm">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.15] text-white tracking-tight drop-shadow-sm"
+            >
               Your Voice. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#fdcc14] to-[#ffe875] font-extrabold">Your Campus.</span> <br />
               Your Future.
-            </h1>
+            </motion.h1>
             
-            <p className="font-body text-base md:text-lg mb-8 text-white/95 max-w-xl leading-relaxed drop-shadow-sm">
-              Digitalization is here to stay. PASAL deserves to stand out in aggregating the concerns, ideas, and suggestions of our students. This platform provides a centralized digital space where every voice is heard, valued, and empowered.
-            </p>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="font-body text-base md:text-lg mb-8 text-white/95 max-w-xl leading-relaxed drop-shadow-md bg-black/20 p-2 rounded-lg backdrop-blur-sm"
+            >
+              <strong className="text-[#fdcc14]">A Vision by Oppong Ankrah:</strong> Digitalization is here to stay. PASAL deserves to stand out in aggregating the concerns, ideas, and suggestions of our students. This platform provides a centralized digital space where every voice is heard, valued, and empowered.
+            </motion.p>
             
-            <div className="flex flex-wrap gap-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="flex flex-wrap gap-4"
+            >
               <Link
                 href="/concerns"
                 className="px-6 py-3.5 bg-primary text-white rounded-lg font-bold flex items-center gap-2 hover:bg-primary/95 transition-all shadow-lg active:scale-95 duration-150 border border-white/15"
@@ -155,8 +184,8 @@ export default function Homepage() {
                 <Lightbulb className="w-5 h-5 text-[#fdcc14]" />
                 Submit a Suggestion
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 

@@ -9,6 +9,7 @@
 CREATE TABLE IF NOT EXISTS public.concerns (
   id          TEXT PRIMARY KEY DEFAULT 'UG-' || floor(1000 + random() * 9000)::TEXT,
   campus      TEXT NOT NULL CHECK (campus IN ('Main', 'City', 'Satellite')),
+  level       TEXT CHECK (level IN ('100', '200', '300', '400')),
   title       TEXT NOT NULL,
   description TEXT NOT NULL,
   anonymous   BOOLEAN NOT NULL DEFAULT TRUE,
@@ -43,6 +44,7 @@ CREATE POLICY "Allow admin delete" ON public.concerns
 CREATE TABLE IF NOT EXISTS public.suggestions (
   id          TEXT PRIMARY KEY DEFAULT 'SUG-' || floor(100 + random() * 900)::TEXT,
   campus      TEXT NOT NULL CHECK (campus IN ('Main', 'City', 'Satellite')),
+  level       TEXT CHECK (level IN ('100', '200', '300', '400')),
   title       TEXT NOT NULL,
   description TEXT NOT NULL,
   anonymous   BOOLEAN NOT NULL DEFAULT TRUE,
