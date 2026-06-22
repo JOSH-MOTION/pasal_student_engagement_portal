@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PASAL Admin Portal</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Geist:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#241a00",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "error-container": "#ffdad6",
+                        "outline": "#757684",
+                        "background": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#959697",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-background": "#0b1c30",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fdcc14",
+                        "tertiary": "#181a1b",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-primary-fixed": "#00115a",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary-container": "#6e5700",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#454653",
+                        "secondary-fixed-dim": "#f1c100",
+                        "on-secondary": "#ffffff",
+                        "primary": "#001057",
+                        "primary-fixed": "#dee0ff",
+                        "secondary": "#745b00",
+                        "surface-container": "#e5eeff",
+                        "tertiary-container": "#2d2f2f",
+                        "on-primary-container": "#7c8ff9",
+                        "surface-tint": "#4155bb",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-container": "#001f8b",
+                        "surface-dim": "#cbdbf5",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary-fixed-dim": "#bac3ff",
+                        "outline-variant": "#c5c5d5",
+                        "inverse-surface": "#213145",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "inverse-primary": "#bac3ff",
+                        "on-surface": "#0b1c30",
+                        "on-primary-fixed-variant": "#263ca2",
+                        "on-secondary-fixed-variant": "#584400",
+                        "secondary-fixed": "#ffe08b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "48px",
+                        "container-padding-mobile": "16px",
+                        "container-padding-desktop": "32px",
+                        "base": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 16, 87, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8f9ff;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 16, 87, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(253, 204, 20, 0.05) 0px, transparent 50%);
+            min-height: 100vh;
+        }
+        .slide-up {
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant flex flex-col p-4 gap-4 z-50">
+<div class="mb-6 px-2">
+<h1 class="font-display text-headline-md font-bold text-primary">PASAL Admin</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Administration Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Admin Dashboard (Active) -->
+<a class="flex items-center gap-3 px-3 py-2.5 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Admin Dashboard</span>
+</a>
+<!-- User Management -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">User Management</span>
+</a>
+<!-- Report Analytics -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Report Analytics</span>
+</a>
+<!-- System Settings -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">System Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 rounded-lg transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 p-container-padding-desktop min-h-screen">
+<!-- Header / Announcement Bar -->
+<header class="flex justify-between items-end mb-8 slide-up" style="animation-delay: 0.1s;">
+<div>
+<h2 class="font-display text-display text-primary leading-tight">Dashboard Overview</h2>
+<p class="text-on-surface-variant text-body-lg">Welcome back, Administrator. System is operational.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 bg-secondary text-on-secondary px-6 py-2.5 rounded-lg font-semibold hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                    Post Announcement
+                </button>
+</div>
+</header>
+<!-- Bento Stats Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-section-gap slide-up" style="animation-delay: 0.2s;">
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">report_problem</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Live Reports</span>
+</div>
+<div>
+<h3 class="text-display text-primary">124</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Total Concerns</p>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-secondary/10 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Ideas</span>
+</div>
+<div>
+<h3 class="text-display text-primary">56</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Total Suggestions</p>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-primary-container/10 p-2 rounded-lg text-primary-container">
+<span class="material-symbols-outlined">work</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Active</span>
+</div>
+<div>
+<h3 class="text-display text-primary">18</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Total Opportunities</p>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-tertiary-container/10 p-2 rounded-lg text-tertiary-container">
+<span class="material-symbols-outlined">event</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Upcoming</span>
+</div>
+<div>
+<h3 class="text-display text-primary">09</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Total Events</p>
+</div>
+</div>
+</section>
+<!-- Asymmetric Layout for Tables and Tools -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter slide-up" style="animation-delay: 0.3s;">
+<!-- Management Table: Concerns (2/3 Width) -->
+<div class="lg:col-span-2 glass-card rounded-xl overflow-hidden flex flex-col">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-white/40">
+<h3 class="font-display text-headline-md text-primary">Recent Concerns</h3>
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 rounded-lg bg-surface-container-low border-none focus:ring-2 focus:ring-primary text-label-md w-64" placeholder="Search reports..." type="text"/>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-all text-label-md">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                            Export
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low/50">
+<tr>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">Reference ID</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">Student Name</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">Subject</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">Status</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 font-mono text-label-md">#UG-7721</td>
+<td class="px-6 py-4 text-on-surface font-medium">Kwame Mensah</td>
+<td class="px-6 py-4 text-on-surface-variant truncate max-w-[200px]">Lab Equipment Malfunction</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-label-sm font-label-sm">Pending</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline font-semibold text-label-md">Review</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 font-mono text-label-md">#UG-7719</td>
+<td class="px-6 py-4 text-on-surface font-medium">Abena Boateng</td>
+<td class="px-6 py-4 text-on-surface-variant truncate max-w-[200px]">Registration Portal Access</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-label-sm font-label-sm">Reviewed</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline font-semibold text-label-md">Review</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 font-mono text-label-md">#UG-7692</td>
+<td class="px-6 py-4 text-on-surface font-medium">John Doe</td>
+<td class="px-6 py-4 text-on-surface-variant truncate max-w-[200px]">Library Wi-Fi Connectivity</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-label-sm font-label-sm">Resolved</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline font-semibold text-label-md">View Details</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container-low/30 border-t border-outline-variant flex justify-center">
+<button class="text-primary font-bold text-label-md hover:underline">View All Concerns</button>
+</div>
+</div>
+<!-- Quick Management Column (1/3 Width) -->
+<div class="space-y-gutter">
+<!-- Announcement Portal -->
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-display text-headline-md text-primary mb-4">Post Announcement</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4">Update the PASAL homepage ticker.</p>
+<textarea class="w-full bg-surface-container-low border-none rounded-lg p-4 text-body-md focus:ring-2 focus:ring-primary h-32 mb-4" placeholder="Type announcement here..."></textarea>
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-bold hover:shadow-lg transition-all active:scale-[0.98]">
+                        Publish Live
+                    </button>
+</div>
+<!-- Create Opportunities / Events -->
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-display text-headline-md text-primary mb-4">Resources</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="p-4 rounded-lg bg-primary-container/10 border border-primary-container/20 text-center hover:bg-primary-container/20 transition-all group">
+<span class="material-symbols-outlined block text-primary mb-2 text-3xl group-hover:scale-110 transition-transform">add_circle</span>
+<span class="font-label-md text-primary">New Job</span>
+</button>
+<button class="p-4 rounded-lg bg-secondary-container/10 border border-secondary-container/20 text-center hover:bg-secondary-container/20 transition-all group">
+<span class="material-symbols-outlined block text-secondary mb-2 text-3xl group-hover:scale-110 transition-transform">calendar_add_on</span>
+<span class="font-label-md text-secondary">New Event</span>
+</button>
+</div>
+</div>
+<!-- Quick Profile Card -->
+<div class="glass-card p-6 rounded-xl flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of an African woman in a modern administrative office setting, soft natural lighting, authoritative yet friendly expression, high-end photography style with shallow depth of field, University of Ghana branding subtly in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsNMYHrPuS4UYrHODlUoJ0qrZZeEnL9ApfoSg5j9BMn2CNS_QKtqCjpFfl3jLUaqoB4nkB151UtQg0d1O8270WQWYore3srPyRvkP6kzulBZxzyuegdCcx1cWlECCPVTkx0EV5x7uu_BV8oFVjA6UP4ce2hHUdxW5lak9kFk6f7abv33_rnH3nOrqdcmO56hwLzBvM8Jj46jt8RzN4PBATFPMnaf8z-j1svZQuA5hK-YMUfb_PJjNwRj_SCFJoVjUflsvqFSS-L90"/>
+</div>
+<div>
+<h4 class="font-bold text-primary">Dr. Amma Addo</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Lead Administrator</p>
+<div class="flex gap-2 mt-2">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-green-600">Online</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Suggestions Table Section -->
+<section class="mt-section-gap slide-up" style="animation-delay: 0.4s;">
+<div class="glass-card rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-white/40">
+<div>
+<h3 class="font-display text-headline-md text-primary">Student Suggestions</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Top ideas for institutional improvement</p>
+</div>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Idea Card 1 -->
+<div class="p-5 border border-outline-variant rounded-xl hover:shadow-md transition-shadow bg-surface-container-lowest">
+<div class="flex justify-between mb-4">
+<span class="text-label-sm font-label-sm text-primary uppercase tracking-wider">Academic</span>
+<span class="text-label-sm text-on-surface-variant">2 hours ago</span>
+</div>
+<h4 class="font-bold text-on-surface mb-2">Digital Thesis Submission</h4>
+<p class="text-body-md text-on-surface-variant mb-4 line-clamp-2">"We should move to a completely paperless thesis submission process to save costs..."</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="text-label-md">45</span>
+</div>
+<button class="bg-primary/5 hover:bg-primary/10 text-primary px-3 py-1 rounded font-bold text-label-md">Escalate</button>
+</div>
+</div>
+<!-- Idea Card 2 -->
+<div class="p-5 border border-outline-variant rounded-xl hover:shadow-md transition-shadow bg-surface-container-lowest">
+<div class="flex justify-between mb-4">
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider">Facility</span>
+<span class="text-label-sm text-on-surface-variant">1 day ago</span>
+</div>
+<h4 class="font-bold text-on-surface mb-2">Solar Panel Installation</h4>
+<p class="text-body-md text-on-surface-variant mb-4 line-clamp-2">"Utilizing the rooftop of the PASAL building for solar energy harvesting..."</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="text-label-md">128</span>
+</div>
+<button class="bg-primary/5 hover:bg-primary/10 text-primary px-3 py-1 rounded font-bold text-label-md">Escalate</button>
+</div>
+</div>
+<!-- Idea Card 3 -->
+<div class="p-5 border border-outline-variant rounded-xl hover:shadow-md transition-shadow bg-surface-container-lowest">
+<div class="flex justify-between mb-4">
+<span class="text-label-sm font-label-sm text-on-tertiary-container uppercase tracking-wider">Social</span>
+<span class="text-label-sm text-on-surface-variant">3 days ago</span>
+</div>
+<h4 class="font-bold text-on-surface mb-2">Inter-College Debate Series</h4>
+<p class="text-body-md text-on-surface-variant mb-4 line-clamp-2">"Creating a formal debate league within the department to foster public speaking..."</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="text-label-md">67</span>
+</div>
+<button class="bg-primary/5 hover:bg-primary/10 text-primary px-3 py-1 rounded font-bold text-label-md">Escalate</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer (Authority: JSON) -->
+<footer class="w-full mt-section-gap border-t border-outline-variant bg-surface-container-highest">
+<div class="max-w-[1200px] mx-auto py-8 px-container-padding-desktop flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-left">
+<h2 class="font-display text-headline-md text-primary">PASAL Portal</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 University of Ghana - PASAL Portal. All rights reserved.</p>
+</div>
+<div class="flex gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">University Site</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- Floating Tooltip / Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simple hover effect for glass cards
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-4px)';
+                    card.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease';
+                    card.classList.add('shadow-xl');
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.classList.remove('shadow-xl');
+                });
+            });
+
+            // Smooth entrance staggering for table rows
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach((row, i) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    row.style.transition = 'all 0.4s ease';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateY(0)';
+                }, 400 + (i * 100));
+            });
+        });
+    </script>
+</body></html>

@@ -1,7 +1,22 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "**.supabase.co" },
+      { protocol: "https", hostname: "upload.wikimedia.org" },
+    ],
+  },
+  // Allow cross-origin requests in dev
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [{ key: "X-Frame-Options", value: "SAMEORIGIN" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

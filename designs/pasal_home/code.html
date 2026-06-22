@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PASAL | Student Engagement Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#241a00",
+                      "on-tertiary": "#ffffff",
+                      "surface-variant": "#d3e4fe",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "error-container": "#ffdad6",
+                      "outline": "#757684",
+                      "background": "#f8f9ff",
+                      "surface": "#f8f9ff",
+                      "on-tertiary-container": "#959697",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-background": "#0b1c30",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#fdcc14",
+                      "tertiary": "#181a1b",
+                      "tertiary-fixed": "#e2e2e2",
+                      "on-primary-fixed": "#00115a",
+                      "on-error": "#ffffff",
+                      "surface-bright": "#f8f9ff",
+                      "surface-container-low": "#eff4ff",
+                      "on-secondary-container": "#6e5700",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#454653",
+                      "secondary-fixed-dim": "#f1c100",
+                      "on-secondary": "#ffffff",
+                      "primary": "#001057",
+                      "primary-fixed": "#dee0ff",
+                      "secondary": "#745b00",
+                      "surface-container": "#e5eeff",
+                      "tertiary-container": "#2d2f2f",
+                      "on-primary-container": "#7c8ff9",
+                      "surface-tint": "#4155bb",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "on-primary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "primary-container": "#001f8b",
+                      "surface-dim": "#cbdbf5",
+                      "inverse-on-surface": "#eaf1ff",
+                      "primary-fixed-dim": "#bac3ff",
+                      "outline-variant": "#c5c5d5",
+                      "inverse-surface": "#213145",
+                      "surface-container-high": "#dce9ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "inverse-primary": "#bac3ff",
+                      "on-surface": "#0b1c30",
+                      "on-primary-fixed-variant": "#263ca2",
+                      "on-secondary-fixed-variant": "#584400",
+                      "secondary-fixed": "#ffe08b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-gap": "48px",
+                      "container-padding-mobile": "16px",
+                      "container-padding-desktop": "32px",
+                      "base": "8px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "display": ["Hanken Grotesk"],
+                      "label-sm": ["Geist"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "label-md": ["Geist"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 16, 87, 0.1);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(to right, rgba(0, 31, 139, 0.95), rgba(0, 31, 139, 0.7)), url('placeholder');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .fade-in-stagger {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+
+        .count-up {
+            transition: all 2s cubic-bezier(0.1, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-surface-container/80 backdrop-blur-xl border-b border-primary/10 shadow-sm">
+<div class="flex justify-between items-center max-w-[1200px] mx-auto px-container-padding-desktop h-16">
+<div class="font-display text-headline-md font-bold text-primary">PASAL</div>
+<div class="hidden md:flex items-center gap-8 font-display text-body-md">
+<a class="text-primary border-b-2 border-secondary-container pb-1 hover:text-secondary transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Concerns</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Suggestions</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Opportunities</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Events</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform p-2 text-primary">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="flex items-center gap-2 cursor-pointer active:scale-95 transition-transform">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-white">person</span>
+</div>
+<span class="hidden sm:inline font-label-md text-label-md font-bold text-primary">Profile</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="mt-16">
+<!-- Hero Section -->
+<section class="relative h-[600px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0 hero-gradient" data-alt="A dignified portrait of a University President standing in front of a majestic, neoclassical university building at dusk. The scene is bathed in a deep royal blue atmosphere with golden architectural highlights, reflecting a sense of leadership, academic tradition, and modern digitalization. Soft light catches the edges of the president's attire, creating a professional and authoritative mood."></div>
+<div class="max-w-[1200px] mx-auto w-full px-container-padding-desktop relative z-10">
+<div class="max-w-2xl text-white fade-in-stagger" style="animation-delay: 0.1s;">
+<h1 class="font-display text-display mb-6">Welcome to the PASAL Student Engagement Portal</h1>
+<p class="font-body-lg text-body-lg mb-8 text-primary-fixed opacity-90">Digitalization is here to stay. We are building a future where every student's voice is heard instantly and every opportunity is at your fingertips.</p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-3 bg-primary text-white rounded-lg font-bold flex items-center gap-2 hover:bg-primary/90 transition-all shadow-lg active:scale-95">
+<span class="material-symbols-outlined">report</span>
+                            Submit a Concern
+                        </button>
+<button class="px-8 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold flex items-center gap-2 hover:bg-secondary-fixed transition-all shadow-lg active:scale-95">
+<span class="material-symbols-outlined">lightbulb</span>
+                            Submit a Suggestion
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions / Buttons Section -->
+<section class="max-w-[1200px] mx-auto px-container-padding-desktop -mt-16 relative z-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-card p-6 rounded-xl flex flex-col gap-4 group cursor-pointer hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">explore</span>
+</div>
+<h3 class="font-display text-headline-md text-primary">Explore Opportunities</h3>
+<p class="text-on-surface-variant">Internships, research roles, and student leadership positions await you.</p>
+<span class="text-primary font-bold flex items-center gap-2">View List <span class="material-symbols-outlined">arrow_forward</span></span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col gap-4 group cursor-pointer hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<h3 class="font-display text-headline-md text-primary">Upcoming Events</h3>
+<p class="text-on-surface-variant">Stay updated with seminars, workshops, and general assembly meetings.</p>
+<span class="text-primary font-bold flex items-center gap-2">Calendar <span class="material-symbols-outlined">arrow_forward</span></span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col gap-4 group cursor-pointer hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-error/10 flex items-center justify-center text-error group-hover:bg-error group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">contact_support</span>
+</div>
+<h3 class="font-display text-headline-md text-primary">Need Support?</h3>
+<p class="text-on-surface-variant">Our administration team is ready to assist you with any inquiries.</p>
+<span class="text-primary font-bold flex items-center gap-2">Contact Us <span class="material-symbols-outlined">arrow_forward</span></span>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="max-w-[1200px] mx-auto px-container-padding-desktop mt-section-gap">
+<div class="text-center mb-12">
+<h2 class="font-display text-headline-lg text-primary">Engagement at a Glance</h2>
+<div class="w-24 h-1 bg-secondary-container mx-auto mt-2 rounded-full"></div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="glass-card p-8 rounded-xl text-center fade-in-stagger" style="animation-delay: 0.2s;">
+<div class="text-primary font-display text-display mb-2">1,240</div>
+<div class="font-label-md text-on-surface-variant">Total Concerns Submitted</div>
+<div class="mt-4 text-primary opacity-20"><span class="material-symbols-outlined text-[48px]">priority_high</span></div>
+</div>
+<div class="glass-card p-8 rounded-xl text-center fade-in-stagger" style="animation-delay: 0.3s;">
+<div class="text-secondary font-display text-display mb-2">856</div>
+<div class="font-label-md text-on-surface-variant">Total Suggestions Submitted</div>
+<div class="mt-4 text-secondary opacity-20"><span class="material-symbols-outlined text-[48px]">auto_awesome</span></div>
+</div>
+<div class="glass-card p-8 rounded-xl text-center fade-in-stagger" style="animation-delay: 0.4s;">
+<div class="text-primary font-display text-display mb-2">12</div>
+<div class="font-label-md text-on-surface-variant">Active Opportunities</div>
+<div class="mt-4 text-primary opacity-20"><span class="material-symbols-outlined text-[48px]">work</span></div>
+</div>
+<div class="glass-card p-8 rounded-xl text-center fade-in-stagger" style="animation-delay: 0.5s;">
+<div class="text-primary font-display text-display mb-2">5</div>
+<div class="font-label-md text-on-surface-variant">Upcoming Events</div>
+<div class="mt-4 text-primary opacity-20"><span class="material-symbols-outlined text-[48px]">event</span></div>
+</div>
+</div>
+</section>
+<!-- Campus Selection -->
+<section class="bg-surface-container-low mt-section-gap py-16">
+<div class="max-w-[1200px] mx-auto px-container-padding-desktop">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+<div>
+<h2 class="font-display text-headline-lg text-primary">Your Campus, Your Voice</h2>
+<p class="text-on-surface-variant mt-2">Tailored experiences based on your primary learning hub.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-full border border-outline-variant hover:bg-white transition-all"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-2 rounded-full border border-outline-variant hover:bg-white transition-all"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Main Campus -->
+<div class="group relative overflow-hidden rounded-2xl h-80 cursor-pointer shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="The grand entrance of a historic University Main Campus with lush green lawns and iconic ivory clock towers. The lighting is bright and airy, reflecting a daytime academic atmosphere with students walking by. The color palette is rich with natural greens and ivory whites." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbSbBFTQxrcrsbfRr3cd2z16MX6yu1eXzTT3AXEsftMiMuplaXNJVwhCRND7gMBuKCJVpAo4lMdpPHFE2_-eh8jEaIiu27pDFGQYDGe56jb1UKmr8IQ7Ja61qPXFgewHDB88mFMwlMmw3A-siMAbX7T8aKmYvXX-4JrOEjHi-4iI3p7eY7EwuU4MK2U6hgJak0oaHHdHwVJtjDtz2oaHIzTn06rPXgZd0b-Mu1e-Px_Iq0gQoEv_T2ubBIDlAP8_CYhBSZjEiESx8')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 text-white w-full">
+<h3 class="font-display text-headline-md mb-2">Main Campus</h3>
+<p class="text-sm opacity-80 mb-4">The heart of PASAL administration and student life.</p>
+<div class="flex items-center justify-between">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold uppercase">4500 Students</span>
+<span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- City Campus -->
+<div class="group relative overflow-hidden rounded-2xl h-80 cursor-pointer shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A modern urban university building featuring sleek glass facades and steel structures. This city campus reflects a professional, corporate academic environment with nearby skyscrapers and city life. The lighting is crisp afternoon sun, creating high-contrast reflections on the glass." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXBkGE6PNLyXj5qKiMLPzvRDT1zSRHbmm7MinNerziZtUzOsmL3xlL6NGQ_KoWmZzwHsmh7F0nM2m513cdkLnCa5KzVkU5-hrw-aypPOktO0bTkx1Y245FlqXbJ_V9hnDq2iq4Ci_qWsYyR7N_jAG2jQPxmo8R5ikZvzN72MOIie5gFE17sLwkXn8hHsxvs0iuA6y-x5bvqW_XPuyPe_s9jf7XFW0sHLoEYxtFYalpskM1RUvDaq_NJA9T3mhEv8cMz5ZFwB15G-w')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 text-white w-full">
+<h3 class="font-display text-headline-md mb-2">City Campus</h3>
+<p class="text-sm opacity-80 mb-4">Where urban dynamism meets academic excellence.</p>
+<div class="flex items-center justify-between">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold uppercase">1200 Students</span>
+<span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Satellite Campus -->
+<div class="group relative overflow-hidden rounded-2xl h-80 cursor-pointer shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A tranquil and focused satellite campus environment surrounded by nature. The architecture is contemporary and low-profile, blending with the landscape. The atmosphere is serene and intellectual, captured during a golden hour sunset with long, warm shadows." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFvTSMD2LDNy2sTU29Tc15Cx__qIM_EIyRmrfmkmmsBbkWu4A81IJIanEx3FFoDJXH7_A8AWMIpaUaAvC0jSsSQ-H2ypa4OFg6JwyC0_RmBr-OU76PNvOKvC2nI_MKcuvE6yu-CDUcnPX65jyFtIQbA5Ip3h7CaoDlUFNo3ADX_iLRI2de77fqa7CWDkCx18YN0kdYEpj7zTTjeFfY8osSdCh6pD5t2kqGqgUjoDnIE7pVjV_UFx5cFK1t1wGUhQY1JLTVMf3FIAo')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 text-white w-full">
+<h3 class="font-display text-headline-md mb-2">Satellite Campus</h3>
+<p class="text-sm opacity-80 mb-4">Focused learning hubs across the regional network.</p>
+<div class="flex items-center justify-between">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold uppercase">800 Students</span>
+<span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-section-gap bg-surface-container-highest dark:bg-tertiary-container border-t border-outline-variant">
+<div class="max-w-[1200px] mx-auto py-8 px-container-padding-desktop flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="font-display text-headline-md text-primary font-bold">PASAL</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant max-w-xs text-center md:text-left">Empowering public administration students through digital innovation and seamless engagement.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6 font-label-sm text-label-sm">
+<a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">University Site</a>
+<a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Contact Support</a>
+</div>
+<div class="text-center md:text-right">
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 University of Ghana - PASAL Portal. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-lg border-t border-primary/10 flex justify-around items-center h-16 px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">report</span>
+<span class="text-[10px]">Concerns</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px]">Opportunities</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction for intersection observer fade-ins
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-stagger').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Background scrolling effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-gradient');
+            if (heroBg) {
+                heroBg.style.backgroundPositionY = (scrolled * 0.5) + 'px';
+            }
+        });
+    </script>
+</body></html>
