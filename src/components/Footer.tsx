@@ -3,11 +3,11 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full mt-section-gap bg-surface-container-highest dark:bg-tertiary-container border-t border-outline-variant transition-colors duration-200">
-      <div className="max-w-[1200px] mx-auto py-8 px-container-padding-mobile md:px-container-padding-desktop flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex flex-col items-center md:items-start gap-3">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9">
+    <footer className="w-full mt-section-gap bg-[#001057] text-white py-12 border-t-4 border-[#FDCC14]">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
+        <div className="flex flex-col items-start gap-4">
+          <div className="flex items-center gap-3">
+            <div className="relative w-10 h-10 bg-white rounded-full p-1 shadow-lg">
               <Image
                 src="/pasal_logo.png"
                 alt="PASAL Logo"
@@ -15,8 +15,8 @@ export default function Footer() {
                 className="object-contain"
               />
             </div>
-            <div className="h-6 w-px bg-primary/20" />
-            <div className="relative w-7 h-7 sm:w-8 sm:h-8">
+            <div className="h-8 w-px bg-white/30" />
+            <div className="relative w-10 h-10 bg-white rounded-full p-1 shadow-lg">
               <Image
                 src="/UG_logo.png"
                 alt="UG Logo"
@@ -24,35 +24,38 @@ export default function Footer() {
                 className="object-contain"
               />
             </div>
-            <span className="font-display text-headline-sm font-extrabold tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent ml-1">
+            <span className="font-display text-2xl font-extrabold tracking-tight text-[#FDCC14] ml-2">
               PASAL
             </span>
           </div>
-          <p className="font-label-sm text-label-sm text-on-surface-variant max-w-xs text-center md:text-left">
-            Empowering public administration students through digital innovation and seamless engagement.
+          <p className="text-white/80 max-w-sm text-sm leading-relaxed">
+            The official digital platform for the Public Administration Students Association (PASAL), University of Ghana. Empowering students through digital innovation.
           </p>
         </div>
         
-        <div className="flex flex-wrap justify-center gap-6 font-label-sm text-label-sm">
-          <Link href="/privacy" className="text-on-surface-variant hover:text-primary underline transition-all">
-            Privacy Policy
-          </Link>
-          <Link href="/terms" className="text-on-surface-variant hover:text-primary underline transition-all">
-            Terms of Service
-          </Link>
-          <a href="https://ug.edu.gh" target="_blank" rel="noopener noreferrer" className="text-on-surface-variant hover:text-primary underline transition-all">
-            University Site
-          </a>
-          <Link href="/support" className="text-on-surface-variant hover:text-primary underline transition-all">
-            Contact Support
-          </Link>
+        <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-[#FDCC14] uppercase tracking-wider text-xs">Resources</h4>
+            <Link href="/concerns" className="text-white/80 hover:text-white transition-colors text-sm">Submit Concern</Link>
+            <Link href="/suggestions" className="text-white/80 hover:text-white transition-colors text-sm">Make Suggestion</Link>
+            <Link href="/opportunities" className="text-white/80 hover:text-white transition-colors text-sm">Opportunities</Link>
+          </div>
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-[#FDCC14] uppercase tracking-wider text-xs">Links</h4>
+            <a href="https://ug.edu.gh" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors text-sm">University of Ghana</a>
+            <Link href="/privacy" className="text-white/80 hover:text-white transition-colors text-sm">Privacy Policy</Link>
+            <Link href="/admin/login" className="text-white/80 hover:text-white transition-colors text-sm">Admin Login</Link>
+          </div>
         </div>
+      </div>
 
-        <div className="text-center md:text-right">
-          <p className="font-label-sm text-label-sm text-on-surface-variant">
-            © {new Date().getFullYear()} University of Ghana - PASAL Portal. All rights reserved.
-          </p>
-        </div>
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p className="text-white/60 text-xs">
+          © {new Date().getFullYear()} PASAL - University of Ghana. All rights reserved.
+        </p>
+        <p className="text-white/60 text-xs flex items-center gap-1">
+          Built with <span className="text-[#FDCC14]">♥</span> for PASAL Students
+        </p>
       </div>
     </footer>
   );
