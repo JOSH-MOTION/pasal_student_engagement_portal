@@ -30,11 +30,11 @@ export const metadata: Metadata = {
     "UG",
   ],
   authors: [{ name: "PASAL – University of Ghana" }],
-  metadataBase: new URL("https://pasal-portal.vercel.app"),
+  metadataBase: new URL("https://pasal-student-engagement-portal.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_GH",
-    url: "https://pasal-portal.vercel.app",
+    url: "https://pasal-student-engagement-portal.vercel.app",
     siteName: "PASAL Student Engagement Portal",
     title: "PASAL | Student Engagement Portal – University of Ghana",
     description:
