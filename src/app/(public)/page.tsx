@@ -88,11 +88,13 @@ export default function Homepage() {
         <div className="bg-[#fdcc14] text-[#001057] border-y border-[#fdcc14]/20 py-3 overflow-hidden">
           <div className="max-w-[1200px] mx-auto px-container-padding-mobile md:px-container-padding-desktop flex items-center gap-3">
             <Megaphone className="w-5 h-5 text-[#001057] animate-bounce shrink-0" />
-            <div className="font-label-md text-label-md font-bold uppercase tracking-wider shrink-0">
+            <div className="font-label-md text-label-md font-bold uppercase tracking-wider shrink-0 z-10 bg-[#fdcc14] pr-4">
               Latest Announcement:
             </div>
-            <div className="text-body-md font-medium truncate flex-grow">
-              {announcements[0].content}
+            <div className="flex-grow overflow-hidden relative h-6 flex items-center">
+              <div className="animate-marquee text-body-md font-medium inline-block w-full">
+                {announcements[0].content}
+              </div>
             </div>
           </div>
         </div>
