@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { supabase, isSupabaseConfigured, Concern, Suggestion } from "@/lib/supabase";
 import {
   AlertTriangle,
   Lightbulb,
   Briefcase,
   Calendar,
-  MessageSquare,
   Clock,
   CheckCircle,
   TrendingUp,
@@ -20,16 +19,15 @@ interface Stats {
   opportunities: number;
   events: number;
   openConcerns: number;
-  openSuggestions: number;
 }
 
 interface RecentItem {
   id: string;
   type: "concern" | "suggestion";
   title?: string;
-  message: string;
+  description: string;
   created_at: string;
-  status: string;
+  status?: string;
 }
 
 const MOCK_STATS: Stats = {
@@ -38,31 +36,31 @@ const MOCK_STATS: Stats = {
   opportunities: 5,
   events: 3,
   openConcerns: 7,
-  openSuggestions: 5,
 };
 
 const MOCK_RECENT: RecentItem[] = [
   {
     id: "1",
     type: "concern",
-    message: "The library closing time is affecting students who have night classes and need resources.",
+    title: "Library Hours Limit",
+    description: "The library closing time is affecting students who have night classes and need resources.",
     created_at: new Date(Date.now() - 2 * 3600000).toISOString(),
-    status: "open",
+    status: "Pending",
   },
   {
     id: "2",
     type: "suggestion",
     title: "Online Course Materials",
-    message: "Could we have an online portal for all course materials?",
+    description: "Could we have an online portal for all course materials?",
     created_at: new Date(Date.now() - 5 * 3600000).toISOString(),
-    status: "under_review",
   },
   {
     id: "3",
     type: "concern",
-    message: "The canteen food quality has dropped significantly this semester.",
+    title: "Welfare Issues",
+    description: "The canteen food quality has dropped significantly this semester.",
     created_at: new Date(Date.now() - 12 * 3600000).toISOString(),
-    status: "open",
+    status: "Reviewed",
   },
 ];
 
@@ -91,33 +89,55 @@ export default function AdminDashboardPage() {
           { count: oppsCount },
           { count: eventsCount },
           { count: openConcernsCount },
-          { count: openSuggCount },
-          { data: recentData },
+          recentConcernsRes,
+          recentSuggestionsRes,
         ] = await Promise.all([
           supabase!.from("concerns").select("id", { count: "exact", head: true }),
           supabase!.from("suggestions").select("id", { count: "exact", head: true }),
           supabase!.from("opportunities").select("id", { count: "exact", head: true }),
           supabase!.from("events").select("id", { count: "exact", head: true }),
-          supabase!.from("concerns").select("id", { count: "exact", head: true }).eq("status", "open"),
-          supabase!.from("suggestions").select("id", { count: "exact", head: true }).eq("status", "open"),
-          supabase!.from("concerns").select("id, message, created_at, status").order("created_at", { ascending: false }).limit(3),
+          supabase!.from("concerns").select("id", { count: "exact", head: true }).eq("status", "Pending"),
+          supabase!.from("concerns").select("id, title, description, created_at, status").order("created_at", { ascending: false }).limit(3),
+          supabase!.from("suggestions").select("id, title, description, created_at").order("created_at", { ascending: false }).limit(3),
         ]);
+
         setStats({
           concerns: concernsCount ?? 0,
           suggestions: suggestionsCount ?? 0,
           opportunities: oppsCount ?? 0,
           events: eventsCount ?? 0,
           openConcerns: openConcernsCount ?? 0,
-          openSuggestions: openSuggCount ?? 0,
         });
-        if (recentData) {
-          setRecent(
-            recentData.map((r: { id: string; message: string; created_at: string; status: string }) => ({
-              ...r,
-              type: "concern" as const,
-            }))
-          );
+
+        const recentList: RecentItem[] = [];
+        if (recentConcernsRes.data) {
+          recentConcernsRes.data.forEach((r: { id: string; title: string; description: string; created_at: string; status: string }) => {
+            recentList.push({
+              id: r.id,
+              type: "concern",
+              title: r.title,
+              description: r.description,
+              created_at: r.created_at,
+              status: r.status,
+            });
+          });
         }
+        if (recentSuggestionsRes.data) {
+          recentSuggestionsRes.data.forEach((r: { id: string; title: string; description: string; created_at: string }) => {
+            recentList.push({
+              id: r.id,
+              type: "suggestion",
+              title: r.title,
+              description: r.description,
+              created_at: r.created_at,
+            });
+          });
+        }
+        // Sort combined list by date descending
+        recentList.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        setRecent(recentList.slice(0, 5));
+      } catch (err) {
+        console.error("Dashboard error fetching data:", err);
       } finally {
         setLoading(false);
       }
@@ -129,7 +149,7 @@ export default function AdminDashboardPage() {
     {
       label: "Total Concerns",
       value: stats.concerns,
-      sub: `${stats.openConcerns} open`,
+      sub: `${stats.openConcerns} going on`,
       icon: AlertTriangle,
       color: "bg-error-container text-error",
       href: "/admin/concerns",
@@ -137,7 +157,7 @@ export default function AdminDashboardPage() {
     {
       label: "Total Suggestions",
       value: stats.suggestions,
-      sub: `${stats.openSuggestions} open`,
+      sub: "Active suggestions",
       icon: Lightbulb,
       color: "bg-secondary-container text-on-secondary-container",
       href: "/admin/suggestions",
@@ -153,7 +173,7 @@ export default function AdminDashboardPage() {
     {
       label: "Upcoming Events",
       value: stats.events,
-      sub: "This month",
+      sub: "Active events",
       icon: Calendar,
       color: "bg-tertiary-container/30 text-on-tertiary-container",
       href: "/admin/events",
@@ -208,7 +228,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="space-y-4">
             {recent.map((item) => (
-              <div key={item.id} className="flex gap-3 p-3 bg-surface-container-low rounded-xl">
+              <div key={`${item.type}-${item.id}`} className="flex gap-3 p-3 bg-surface-container-low rounded-xl">
                 <div
                   className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
                     item.type === "concern" ? "bg-error-container" : "bg-secondary-container"
@@ -221,23 +241,37 @@ export default function AdminDashboardPage() {
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  {item.title && (
-                    <p className="font-bold text-xs text-on-surface mb-0.5 truncate">{item.title}</p>
-                  )}
-                  <p className="text-xs text-on-surface-variant line-clamp-2">{item.message}</p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span
-                      className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        item.status === "open"
-                          ? "bg-error-container text-error"
-                          : "bg-secondary-container text-on-secondary-container"
-                      }`}
-                    >
-                      <Clock className="w-2.5 h-2.5" />
-                      {item.status.replace("_", " ")}
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
+                      {item.type}
                     </span>
+                    <span className="text-[10px] text-on-surface-variant">•</span>
                     <span className="text-[10px] text-on-surface-variant">{timeAgo(item.created_at)}</span>
                   </div>
+                  {item.title && (
+                    <p className="font-bold text-xs text-primary mb-0.5 truncate">{item.title}</p>
+                  )}
+                  <p className="text-xs text-on-surface-variant line-clamp-2">{item.description}</p>
+                  {item.type === "concern" && item.status && (
+                    <div className="flex items-center gap-2 mt-1">
+                      <span
+                        className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                          item.status === "Pending"
+                            ? "bg-amber-100 text-amber-800"
+                            : item.status === "Reviewed"
+                            ? "bg-blue-100 text-blue-800"
+                            : "bg-green-100 text-green-800"
+                        }`}
+                      >
+                        <Clock className="w-2.5 h-2.5" />
+                        {item.status === "Pending"
+                          ? "Going on"
+                          : item.status === "Reviewed"
+                          ? "In Progress"
+                          : "Solved / Finished"}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -251,9 +285,8 @@ export default function AdminDashboardPage() {
             {[
               { label: "Review Open Concerns", href: "/admin/concerns", icon: AlertTriangle, color: "text-error" },
               { label: "Review Suggestions", href: "/admin/suggestions", icon: Lightbulb, color: "text-secondary" },
-              { label: "Post Opportunity", href: "/admin/opportunities/new", icon: Briefcase, color: "text-primary" },
-              { label: "Create Event", href: "/admin/events/new", icon: Calendar, color: "text-primary" },
-              { label: "Post Announcement", href: "/admin/announcements/new", icon: MessageSquare, color: "text-on-tertiary-container" },
+              { label: "Post Opportunity", href: "/admin/opportunities", icon: Briefcase, color: "text-primary" },
+              { label: "Create Event", href: "/admin/events", icon: Calendar, color: "text-primary" },
             ].map((action) => {
               const Icon = action.icon;
               return (

@@ -355,7 +355,13 @@ function ConcernsContent() {
                 return (
                   <div
                     key={item.id}
-                    className="glass-card p-6 rounded-xl border-l-4 border-l-error slide-up flex flex-col justify-between hover:shadow-md transition-shadow"
+                    className={`glass-card p-6 rounded-xl border-l-4 slide-up flex flex-col justify-between hover:shadow-md transition-shadow ${
+                      isPending 
+                        ? "border-l-amber-500" 
+                        : isReviewed 
+                        ? "border-l-blue-500" 
+                        : "border-l-green-500"
+                    }`}
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     <div>
@@ -402,13 +408,13 @@ function ConcernsContent() {
                         <span 
                           className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${
                             isPending 
-                              ? "bg-error-container text-on-error-container" 
+                              ? "bg-amber-100 text-amber-800 border border-amber-200" 
                               : isReviewed 
-                              ? "bg-secondary-container text-on-secondary-container" 
-                              : "bg-surface-container-highest text-on-surface-variant"
+                              ? "bg-blue-100 text-blue-800 border border-blue-200" 
+                              : "bg-green-100 text-green-800 border border-green-200"
                           }`}
                         >
-                          {item.status}
+                          {isPending ? "Going on" : isReviewed ? "In Progress" : "Solved / Finished"}
                         </span>
                       </div>
                     </div>
